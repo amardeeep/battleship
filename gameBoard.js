@@ -1,4 +1,3 @@
-import { co } from "co";
 import { ship } from "./ship.js";
 function gameBoard() {
   let board = [];
@@ -6,11 +5,12 @@ function gameBoard() {
     { name: "Destroyer", shipObject: ship(5) },
     { name: "WarShip", shipObject: ship(3) },
   ];
+  let misses = [];
   //create board to store
   for (let i = 0; i < 10; i++) {
     board[i] = [];
     for (let j = 0; j < 10; j++) {
-      board[i][j] = { isShip: "none", isAttacked: "not attacked" };
+      board[i][j] = { isShip: "none", isAttacked: "not" };
     }
   }
   //function getShip
@@ -41,16 +41,35 @@ function gameBoard() {
     }
     return board;
   }
+  //fucntion to store a miss
+  function missedAttacks(row, column) {
+    misses.push({ row, column });
+  }
   //fucntion recieveAttack
   function recieveAttack(row, column) {
-    if (board[row][column].isShip == "none") {
-      board[row][column].isAttacked = "Miss";
+    if (board[row][column].isAttacked == "not") {
+      if (board[row][column].isShip == "none") {
+        board[row][column].isAttacked = "miss";
+        missedAttacks(row, column);
+        return misses;
+      } else {
+        board[row][column].isAttacked = "hit";
+        let hitShip = getShip(board[row][column].isShip);
+        return hitShip.hit();
+      }
     } else {
-      board[row][column].isAttacked = "hit";
-      let hitShip = getShip(board[row][column].isShip);
-      return hitShip.hit();
+      return "invalid Move";
     }
   }
-  return { board, placeShip, recieveAttack };
+  //functio to check if all ships have sunk
+  function haveAllShipsSunk() {
+    for (let ship of ships) {
+      if (ship.shipObject.isSunk() == false) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return { board, placeShip, recieveAttack, haveAllShipsSunk };
 }
 export { gameBoard };

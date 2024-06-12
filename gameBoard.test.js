@@ -20,5 +20,13 @@ test("placeShip on y axis", () => {
 board.recieveAttack(3, 3);
 test("recieveAttack, hits a ship", () => {
   expect(board.board[3][3].isAttacked).toBe("hit");
-  expect(board.recieveAttack(3, 3)).toBe(2);
+  expect(board.recieveAttack(3, 4)).toBe(2);
+  expect(board.recieveAttack(3, 5)).toBe(3);
+});
+board.recieveAttack(2, 3);
+test("receiveAttack,misses", () => {
+  expect(board.board[2][3].isAttacked).toBe("miss");
+});
+test("have all ship sunk", () => {
+  expect(board.haveAllShipsSunk()).toBe(false);
 });
