@@ -2,8 +2,11 @@ import { ship } from "./ship.js";
 function gameBoard() {
   let board = [];
   let ships = [
-    { name: "Destroyer", shipObject: ship(5) },
-    { name: "WarShip", shipObject: ship(3) },
+    { name: "destroyer", shipObject: ship(3) },
+    { name: "patrol boat", shipObject: ship(2) },
+    { name: "carrier", shipObject: ship(5) },
+    { name: "battleship", shipObject: ship(4) },
+    { name: "submarine", shipObject: ship(3) },
   ];
   let misses = [];
   //create board to store

@@ -1,9 +1,9 @@
 import { gameBoard } from "./gameBoard.js";
 function player(type) {
-  let board = gameBoard();
+  let boardObj = gameBoard();
   return {
     type,
-    board,
+    boardObj,
   };
 }
 export { player };
