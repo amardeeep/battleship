@@ -30,14 +30,14 @@ function gameBoard() {
     let length = ship.lengthOfShip;
     if (axis == "x") {
       if (column + length < 10) {
-        for (let temp = 0; temp <= length; temp++) {
+        for (let temp = 0; temp < length; temp++) {
           board[row][column + temp].isShip = shipname;
         }
       }
     }
     if (axis == "y") {
       if (row + length < 10) {
-        for (let temp = 0; temp <= length; temp++) {
+        for (let temp = 0; temp < length; temp++) {
           board[row + temp][column].isShip = shipname;
         }
       }
