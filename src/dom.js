@@ -1,4 +1,5 @@
 //function to render boards
+import { computerTurn } from "./index.js";
 function renderBoard(divTypeBoard, boardObj) {
   const divBoard = document.createElement("div");
   divBoard.setAttribute("class", "divBoard");
@@ -17,13 +18,14 @@ function renderBoard(divTypeBoard, boardObj) {
       if (divElement.dataset.status == "hit") {
         divElement.setAttribute("class", "hitdiv");
       }
-      if (divTypeBoard.getAttribute("class") == "realBoard") {
+      if (divTypeBoard.getAttribute("class") == "compBoard") {
         divElement.addEventListener("click", () => {
           boardObj.recieveAttack(row, column);
           while (divBoard.hasChildNodes()) {
             divBoard.removeChild(divBoard.firstChild);
           }
           renderBoard(divTypeBoard, boardObj);
+          const timeout = setTimeout(computerTurn, 3000);
         });
       }
       divBoard.appendChild(divElement);
@@ -32,4 +34,5 @@ function renderBoard(divTypeBoard, boardObj) {
   divTypeBoard.appendChild(divBoard);
 }
 //function to
+
 export { renderBoard };

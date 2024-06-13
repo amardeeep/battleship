@@ -50,3 +50,26 @@ function computerMove() {
   let column = Math.floor(Math.random() * 9);
   return { row, column };
 }
+function computerTurn() {
+  let attackCoor = computerMove();
+  while (
+    !playerReal.boardObj.recieveAttack(attackCoor.row, attackCoor.column)
+  ) {
+    attackCoor = computerMove();
+    console.log("reached Here1");
+  }
+  playerReal.boardObj.recieveAttack(attackCoor.row, attackCoor.column);
+
+  while (realBoard.hasChildNodes()) {
+    realBoard.removeChild(realBoard.firstChild);
+  }
+  realBoard.innerHTML = "Player Board!";
+  renderBoard(realBoard, playerReal.boardObj);
+}
+
+/*const divElement = document.querySelector(".divElement");
+divElement.innerHTML = "hh";
+divElement.addEventListener("click", () => {
+  const timeout = setTimeout(computerTurn, 3000);
+});*/
+export { computerTurn };
