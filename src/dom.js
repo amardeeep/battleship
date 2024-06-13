@@ -17,13 +17,15 @@ function renderBoard(divTypeBoard, boardObj) {
       if (divElement.dataset.status == "hit") {
         divElement.setAttribute("class", "hitdiv");
       }
-      divElement.addEventListener("click", () => {
-        boardObj.recieveAttack(row, column);
-        while (divBoard.hasChildNodes()) {
-          divBoard.removeChild(divBoard.firstChild);
-        }
-        renderBoard(divTypeBoard, boardObj);
-      });
+      if (divTypeBoard.getAttribute("class") == "realBoard") {
+        divElement.addEventListener("click", () => {
+          boardObj.recieveAttack(row, column);
+          while (divBoard.hasChildNodes()) {
+            divBoard.removeChild(divBoard.firstChild);
+          }
+          renderBoard(divTypeBoard, boardObj);
+        });
+      }
       divBoard.appendChild(divElement);
     }
   }

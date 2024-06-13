@@ -43,3 +43,10 @@ compBoard.innerHTML = "Computer Board!";
 renderBoard(compBoard, playerComputer.boardObj);
 boards.appendChild(compBoard);
 body.appendChild(boards);
+//function to handle turns
+//fucntioin to generate random coordinates
+function computerMove() {
+  let row = Math.floor(Math.random() * 9);
+  let column = Math.floor(Math.random() * 9);
+  return { row, column };
+}

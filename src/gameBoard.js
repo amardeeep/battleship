@@ -61,7 +61,7 @@ function gameBoard() {
         return hitShip.hit();
       }
     } else {
-      return "invalid Move";
+      return false;
     }
   }
   //functio to check if all ships have sunk
