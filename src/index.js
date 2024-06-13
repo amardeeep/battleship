@@ -67,9 +67,4 @@ function computerTurn() {
   renderBoard(realBoard, playerReal.boardObj);
 }
 
-/*const divElement = document.querySelector(".divElement");
-divElement.innerHTML = "hh";
-divElement.addEventListener("click", () => {
-  const timeout = setTimeout(computerTurn, 3000);
-});*/
 export { computerTurn };

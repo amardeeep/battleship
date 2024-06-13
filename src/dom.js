@@ -25,6 +25,7 @@ function renderBoard(divTypeBoard, boardObj) {
             divBoard.removeChild(divBoard.firstChild);
           }
           renderBoard(divTypeBoard, boardObj);
+
           const timeout = setTimeout(computerTurn, 3000);
         });
       }
