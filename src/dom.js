@@ -1,6 +1,7 @@
 //function to render boards
 import { computerTurn } from "./index.js";
 function renderBoard(divTypeBoard, boardObj) {
+  const divDisplayResluts = document.querySelector(".displayResults");
   const divBoard = document.createElement("div");
   divBoard.setAttribute("class", "divBoard");
   for (let row = 0; row < 10; row++) {
@@ -19,15 +20,23 @@ function renderBoard(divTypeBoard, boardObj) {
         divElement.setAttribute("class", "hitdiv");
       }
       if (divTypeBoard.getAttribute("class") == "compBoard") {
-        divElement.addEventListener("click", () => {
-          boardObj.recieveAttack(row, column);
-          while (divBoard.hasChildNodes()) {
-            divBoard.removeChild(divBoard.firstChild);
-          }
-          renderBoard(divTypeBoard, boardObj);
+        if (divElement.dataset.status == "not") {
+          divElement.addEventListener("click", () => {
+            boardObj.recieveAttack(row, column);
+            while (divBoard.hasChildNodes()) {
+              divBoard.removeChild(divBoard.firstChild);
+            }
+            renderBoard(divTypeBoard, boardObj);
+            divDisplayResluts.innerHTML = "Computer's turn!";
+            if (boardObj.haveAllShipsSunk()) {
+              divDisplayResluts.innerHTML =
+                "Game Over! Player wins.Thank you for playing";
+              return null;
+            }
 
-          const timeout = setTimeout(computerTurn, 3000);
-        });
+            const timeout = setTimeout(computerTurn, 1000);
+          });
+        }
       }
       divBoard.appendChild(divElement);
     }

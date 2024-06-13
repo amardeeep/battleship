@@ -9,13 +9,11 @@ const body = document.querySelector("body");
 const header = document.createElement("div");
 header.innerHTML = "header";
 body.appendChild(header);
-//footer
-const footer = document.createElement("div");
-footer.innerHTML = "footer";
-body.appendChild(footer);
+
 //boards
 //real gameboard rendering
 const boards = document.createElement("div");
+
 boards.setAttribute("class", "board");
 let playerReal = player("real");
 playerReal.boardObj.placeShip(0, 1, "x", "destroyer");
@@ -29,7 +27,9 @@ realBoard.innerHTML = "Player Board!";
 renderBoard(realBoard, playerReal.boardObj);
 boards.appendChild(realBoard);
 body.appendChild(boards);
-
+const divDisplayResluts = document.createElement("div");
+divDisplayResluts.setAttribute("class", "displayResults");
+boards.appendChild(divDisplayResluts);
 //computer gameboard rendering
 let playerComputer = player("computer");
 playerComputer.boardObj.placeShip(1, 0, "x", "destroyer");
@@ -46,8 +46,8 @@ body.appendChild(boards);
 //function to handle turns
 //fucntioin to generate random coordinates
 function computerMove() {
-  let row = Math.floor(Math.random() * 9);
-  let column = Math.floor(Math.random() * 9);
+  let row = Math.floor(Math.random() * 10);
+  let column = Math.floor(Math.random() * 10);
   return { row, column };
 }
 function computerTurn() {
@@ -65,6 +65,16 @@ function computerTurn() {
   }
   realBoard.innerHTML = "Player Board!";
   renderBoard(realBoard, playerReal.boardObj);
+  divDisplayResluts.innerHTML = "Your turn";
+  if (playerReal.boardObj.haveAllShipsSunk()) {
+    divDisplayResluts.innerHTML =
+      "Game Over!Computer wins. Thank You for playing :) ";
+    return null;
+  }
 }
 
+//footer
+const footer = document.createElement("div");
+footer.innerHTML = "footer";
+body.appendChild(footer);
 export { computerTurn };

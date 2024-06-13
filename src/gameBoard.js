@@ -64,7 +64,7 @@ function gameBoard() {
       return false;
     }
   }
-  //functio to check if all ships have sunk
+  //function to check if all ships have sunk
   function haveAllShipsSunk() {
     for (let ship of ships) {
       if (ship.shipObject.isSunk() == false) {
