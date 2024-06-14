@@ -38,6 +38,16 @@ function renderBoard(divTypeBoard, boardObj) {
           });
         }
       }
+      if (divTypeBoard.getAttribute("class") == "realBoard") {
+        if (boardObj.board[row][column].isShip != "none") {
+          if (divElement.dataset.status == "hit") {
+            divElement.setAttribute("class", "hitdiv");
+          }
+          if (divElement.dataset.status == "not") {
+            divElement.setAttribute("class", "hasShip");
+          }
+        }
+      }
       divBoard.appendChild(divElement);
     }
   }

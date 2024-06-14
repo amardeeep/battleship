@@ -31,15 +31,27 @@ function gameBoard() {
     if (axis == "x") {
       if (column + length < 10) {
         for (let temp = 0; temp < length; temp++) {
-          board[row][column + temp].isShip = shipname;
+          if ((board[row][column + temp].isShip = "none")) {
+            board[row][column + temp].isShip = shipname;
+          } else {
+            return false;
+          }
         }
+      } else {
+        return false;
       }
     }
     if (axis == "y") {
       if (row + length < 10) {
         for (let temp = 0; temp < length; temp++) {
-          board[row + temp][column].isShip = shipname;
+          if ((board[row + temp][column].isShip = "none")) {
+            board[row + temp][column].isShip = shipname;
+          } else {
+            return false;
+          }
         }
+      } else {
+        return false;
       }
     }
     return board;

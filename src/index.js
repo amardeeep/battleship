@@ -1,18 +1,19 @@
 import { player } from "./player.js";
-import { gameBoard } from "./gameBoard.js";
-import { ship } from "./ship.js";
 import { renderBoard } from "./dom.js";
 import "./style.css";
 //creating dom elements
 const body = document.querySelector("body");
 //header
 const header = document.createElement("div");
-header.innerHTML = "header";
+header.innerHTML = "BATTLESHIP!";
+header.setAttribute("class", "header");
 body.appendChild(header);
 
 //boards
 //real gameboard rendering
 const boards = document.createElement("div");
+const buttonRandom = document.createElement("button");
+buttonRandom.addEventListener("click", () => {});
 
 boards.setAttribute("class", "board");
 let playerReal = player("real");
