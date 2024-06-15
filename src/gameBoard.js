@@ -28,7 +28,7 @@ function gameBoard() {
   function placeShip(row, column, axis, shipname) {
     let ship = getShip(shipname);
     let length = ship.lengthOfShip;
-    if (axis == "x") {
+    if (axis == 0) {
       if (column + length < 10) {
         for (let temp = 0; temp < length; temp++) {
           if ((board[row][column + temp].isShip = "none")) {
@@ -41,7 +41,7 @@ function gameBoard() {
         return false;
       }
     }
-    if (axis == "y") {
+    if (axis == 1) {
       if (row + length < 10) {
         for (let temp = 0; temp < length; temp++) {
           if ((board[row + temp][column].isShip = "none")) {
