@@ -10,9 +10,21 @@
     gap: 40px;
 }
 .divElement{
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
+    --blur: 1.75rem;
+    --box-blur: calc(0.5 * var(--blur));
+    --glow: var(--color);
+    --size: 12rem;
+    --color: #f2edc6; filter: saturate(175%);
+    border-radius: 12px;
+  border: 4px solid currentColor;
+  box-shadow: 
+    /* --- "glass" tube --- */
+    /* inside */ inset 0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* outside */      0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* --- glow --- */
+    /* inside */ inset 0 0 var(--box-blur) var(--glow),
+    /* outside */      0 0 var(--box-blur) var(--glow);
+  color: var(--color, white);
     width: 50px;
     height: 50px;
 }
@@ -20,10 +32,21 @@
     background-color: grey;
 }
 .missdiv{
-    background-color: red;
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
+    --blur: 1.75rem;
+    --box-blur: calc(0.5 * var(--blur));
+    --glow: var(--color);
+    --size: 12rem;
+    --color: #fe1f1f; filter: saturate(175%);
+    border-radius: 12px;
+  border: 4px solid currentColor;
+  box-shadow: 
+    /* --- "glass" tube --- */
+    /* inside */ inset 0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* outside */      0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* --- glow --- */
+    /* inside */ inset 0 0 var(--box-blur) var(--glow),
+    /* outside */      0 0 var(--box-blur) var(--glow);
+  color: var(--color, white);
     width: 50px;
     height: 50px;
 }
@@ -31,10 +54,21 @@
     cursor: not-allowed;
 }
 .hitdiv{
-    background-color: green;
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
+    --blur: 1.75rem;
+    --box-blur: calc(0.5 * var(--blur));
+    --glow: var(--color);
+    --size: 12rem;
+    --color: #16fa2d; filter: saturate(175%);
+    border-radius: 12px;
+  border: 4px solid currentColor;
+  box-shadow: 
+    /* --- "glass" tube --- */
+    /* inside */ inset 0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* outside */      0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* --- glow --- */
+    /* inside */ inset 0 0 var(--box-blur) var(--glow),
+    /* outside */      0 0 var(--box-blur) var(--glow);
+  color: var(--color, white);
     width: 50px;
     height: 50px;
 }
@@ -42,10 +76,60 @@
     cursor: not-allowed;
 }
 .hasShip{
-    background-color: blue;
-    border-style: solid;
-    border-color: black;
-    border-width: 2px;
+    --blur: 1.75rem;
+    --box-blur: calc(0.5 * var(--blur));
+    --glow: var(--color);
+    --size: 12rem;
+    --color: #3575db; filter: saturate(175%);
+    border-radius: 8px;
+  border: 4px solid currentColor;
+  box-shadow: 
+    /* --- "glass" tube --- */
+    /* inside */ inset 0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* outside */      0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* --- glow --- */
+    /* inside */ inset 0 0 var(--box-blur) var(--glow),
+    /* outside */      0 0 var(--box-blur) var(--glow);
+  color: var(--color, white);
     width: 50px;
     height: 50px;
+}
+body{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #101010;
+}
+html{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: beige;
+    width: 100%;
+    height: 100%;
+}
+.header{
+    display: flex;
+    --blur: 1.75rem;
+    --box-blur: calc(0.5 * var(--blur));
+    --glow: var(--color);
+    --size: 12rem;
+    --color: #5f238a; filter: saturate(175%);
+    border-radius: 8px;
+  border: 4px solid currentColor;
+  box-shadow: 
+    /* --- "glass" tube --- */
+    /* inside */ inset 0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* outside */      0 0 0 2px rgba(0, 0, 0, 0.15),
+    /* --- glow --- */
+    /* inside */ inset 0 0 var(--box-blur) var(--glow),
+    /* outside */      0 0 var(--box-blur) var(--glow);
+  color: var(--color, white);
+  height: 125px;
+  width: 300px;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }

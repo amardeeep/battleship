@@ -40,23 +40,30 @@ function placeShips(boardObj) {
   }
 }
 placeShips(playerReal.boardObj);
-
-//above this trials
-/*playerReal.boardObj.placeShip(0, 1, 0, "destroyer");
-playerReal.boardObj.placeShip(1, 5, 1, "patrol boat");
-playerReal.boardObj.placeShip(3, 1, 1, "carrier");
-playerReal.boardObj.placeShip(3, 8, 1, "battleship");
-playerReal.boardObj.placeShip(8, 3, 0, "submarine");*/
 const realBoard = document.createElement("div");
+const realSection = document.createElement("div");
+realSection.setAttribute("class", "realSection");
 realBoard.setAttribute("class", "realBoard");
-realBoard.innerHTML = "Player Board!";
+realSection.innerHTML = "Player Board!";
 renderBoard(realBoard, playerReal.boardObj);
-boards.appendChild(realBoard);
+realSection.appendChild(realBoard);
+boards.appendChild(realSection);
 body.appendChild(boards);
+//middle section that will display turns an final resluts and button to randomize
+
 const statusHeading = document.createElement("div");
 statusHeading.innerHTML = "Displaying turns!";
-const divDisplayResluts = document.createElement("div");
+const divDisplayResluts = document.createElement("dialog");
 divDisplayResluts.setAttribute("class", "displayResults");
+const dialogP = document.createElement("p");
+const closeBtn = document.createElement("button");
+divDisplayResluts.appendChild(closeBtn);
+closeBtn.addEventListener("click", () => {
+  const timeout = setTimeout(computerTurn, 1000);
+  divDisplayResluts.close();
+});
+dialogP.setAttribute("class", "output");
+divDisplayResluts.appendChild(dialogP);
 const buttonRandom = document.createElement("button");
 buttonRandom.innerHTML = "Randomize Ships Position!";
 buttonRandom.addEventListener("click", () => {
@@ -71,11 +78,6 @@ statusHeading.appendChild(divDisplayResluts);
 boards.appendChild(statusHeading);
 //computer gameboard rendering
 let playerComputer = player("computer");
-/*playerComputer.boardObj.placeShip(1, 0, 0, "destroyer");
-playerComputer.boardObj.placeShip(1, 5, 1, "patrol boat");
-playerComputer.boardObj.placeShip(3, 1, 1, "carrier");
-playerComputer.boardObj.placeShip(3, 8, 1, "battleship");
-playerComputer.boardObj.placeShip(8, 3, 0, "submarine");*/
 placeShips(playerComputer.boardObj);
 const compBoard = document.createElement("div");
 compBoard.setAttribute("class", "compBoard");
@@ -96,7 +98,6 @@ function computerTurn() {
     !playerReal.boardObj.recieveAttack(attackCoor.row, attackCoor.column)
   ) {
     attackCoor = computerMove();
-    console.log("reached Here1");
   }
   playerReal.boardObj.recieveAttack(attackCoor.row, attackCoor.column);
 
@@ -105,16 +106,23 @@ function computerTurn() {
   }
   realBoard.innerHTML = "Player Board!";
   renderBoard(realBoard, playerReal.boardObj);
-  divDisplayResluts.innerHTML = "Your turn";
+  dialogP.innerHTML = "Your turn";
+  divDisplayResluts.showModal();
   if (playerReal.boardObj.haveAllShipsSunk()) {
-    divDisplayResluts.innerHTML =
-      "Game Over!Computer wins. Thank You for playing :) ";
+    dialogP.innerHTML = "Game Over!Computer wins. Thank You for playing :) ";
+    divDisplayResluts.showModal();
     return null;
   }
 }
 
 //footer
 const footer = document.createElement("div");
+footer.setAttribute("class", "footer");
+const credits = document.createElement("div");
+credits.innerHTML =
+  'Credits:<a href="https://unsplash.com/@enisvisuals?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Enis Can Ceyhan</a> on <a href="https://unsplash.com/photos/two-ships-in-the-water-with-a-hill-in-the-background--KpYReIbd8Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>';
+
 footer.innerHTML = "footer";
+footer.appendChild(credits);
 body.appendChild(footer);
 export { computerTurn };

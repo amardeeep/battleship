@@ -2,6 +2,7 @@
 import { computerTurn } from "./index.js";
 function renderBoard(divTypeBoard, boardObj) {
   const divDisplayResluts = document.querySelector(".displayResults");
+  const para = document.querySelector(".output");
   const divBoard = document.createElement("div");
   divBoard.setAttribute("class", "divBoard");
   for (let row = 0; row < 10; row++) {
@@ -23,18 +24,17 @@ function renderBoard(divTypeBoard, boardObj) {
         if (divElement.dataset.status == "not") {
           divElement.addEventListener("click", () => {
             boardObj.recieveAttack(row, column);
-            while (divBoard.hasChildNodes()) {
-              divBoard.removeChild(divBoard.firstChild);
+            while (divTypeBoard.hasChildNodes()) {
+              divTypeBoard.removeChild(divTypeBoard.firstChild);
             }
             renderBoard(divTypeBoard, boardObj);
-            divDisplayResluts.innerHTML = "Computer's turn!";
+            para.innerHTML = "Computer's turn!";
+            divDisplayResluts.showModal();
             if (boardObj.haveAllShipsSunk()) {
-              divDisplayResluts.innerHTML =
-                "Game Over! Player wins.Thank you for playing";
+              para.innerHTML = "Game Over! Player wins.Thank you for playing";
+              divDisplayResluts.showModal();
               return null;
             }
-
-            const timeout = setTimeout(computerTurn, 1000);
           });
         }
       }
