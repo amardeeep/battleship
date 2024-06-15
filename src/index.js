@@ -1,6 +1,13 @@
 import { player } from "./player.js";
 import { renderBoard } from "./dom.js";
 import "./style.css";
+const ships = [
+  "destroyer",
+  "submarine",
+  "patrol boat",
+  "carrier",
+  "battleship",
+];
 //creating dom elements
 const body = document.querySelector("body");
 //header
@@ -12,16 +19,34 @@ body.appendChild(header);
 //boards
 //real gameboard rendering
 const boards = document.createElement("div");
-const buttonRandom = document.createElement("button");
-buttonRandom.addEventListener("click", () => {});
+function randomgen() {
+  let row = Math.floor(Math.random() * 10);
+  let column = Math.floor(Math.random() * 10);
+  let axis = Math.floor(Math.random() * 2);
+  return { row, column, axis };
+}
+//setting
 
 boards.setAttribute("class", "board");
 let playerReal = player("real");
-playerReal.boardObj.placeShip(0, 1, 0, "destroyer");
+function placeShips(boardObj) {
+  boardObj.reset();
+  for (let ship of ships) {
+    let indices = randomgen();
+    while (!boardObj.check(indices.row, indices.column, indices.axis, ship)) {
+      indices = randomgen();
+    }
+    boardObj.placeShip(indices.row, indices.column, indices.axis, ship);
+  }
+}
+placeShips(playerReal.boardObj);
+
+//above this trials
+/*playerReal.boardObj.placeShip(0, 1, 0, "destroyer");
 playerReal.boardObj.placeShip(1, 5, 1, "patrol boat");
 playerReal.boardObj.placeShip(3, 1, 1, "carrier");
 playerReal.boardObj.placeShip(3, 8, 1, "battleship");
-playerReal.boardObj.placeShip(8, 3, 0, "submarine");
+playerReal.boardObj.placeShip(8, 3, 0, "submarine");*/
 const realBoard = document.createElement("div");
 realBoard.setAttribute("class", "realBoard");
 realBoard.innerHTML = "Player Board!";
@@ -32,15 +57,26 @@ const statusHeading = document.createElement("div");
 statusHeading.innerHTML = "Displaying turns!";
 const divDisplayResluts = document.createElement("div");
 divDisplayResluts.setAttribute("class", "displayResults");
+const buttonRandom = document.createElement("button");
+buttonRandom.innerHTML = "Randomize Ships Position!";
+buttonRandom.addEventListener("click", () => {
+  while (realBoard.hasChildNodes()) {
+    realBoard.removeChild(realBoard.firstChild);
+  }
+  placeShips(playerReal.boardObj);
+  renderBoard(realBoard, playerReal.boardObj);
+});
+statusHeading.appendChild(buttonRandom);
 statusHeading.appendChild(divDisplayResluts);
 boards.appendChild(statusHeading);
 //computer gameboard rendering
 let playerComputer = player("computer");
-playerComputer.boardObj.placeShip(1, 0, 0, "destroyer");
+/*playerComputer.boardObj.placeShip(1, 0, 0, "destroyer");
 playerComputer.boardObj.placeShip(1, 5, 1, "patrol boat");
 playerComputer.boardObj.placeShip(3, 1, 1, "carrier");
 playerComputer.boardObj.placeShip(3, 8, 1, "battleship");
-playerComputer.boardObj.placeShip(8, 3, 0, "submarine");
+playerComputer.boardObj.placeShip(8, 3, 0, "submarine");*/
+placeShips(playerComputer.boardObj);
 const compBoard = document.createElement("div");
 compBoard.setAttribute("class", "compBoard");
 compBoard.innerHTML = "Computer Board!";

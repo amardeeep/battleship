@@ -24,34 +24,52 @@ function gameBoard() {
       }
     }
   }
-  //function to place a ship at given coordinates
-  function placeShip(row, column, axis, shipname) {
+  //function to check if it is possible to place a ship
+  function check(row, column, axis, shipname) {
     let ship = getShip(shipname);
     let length = ship.lengthOfShip;
     if (axis == 0) {
       if (column + length < 10) {
         for (let temp = 0; temp < length; temp++) {
-          if ((board[row][column + temp].isShip = "none")) {
-            board[row][column + temp].isShip = shipname;
-          } else {
+          if (board[row][column + temp].isShip != "none") {
             return false;
           }
         }
-      } else {
-        return false;
-      }
+        return true;
+      } else return false;
     }
     if (axis == 1) {
       if (row + length < 10) {
         for (let temp = 0; temp < length; temp++) {
-          if ((board[row + temp][column].isShip = "none")) {
-            board[row + temp][column].isShip = shipname;
-          } else {
+          if (board[row + temp][column].isShip != "none") {
             return false;
           }
         }
-      } else {
-        return false;
+        return true;
+      } else return false;
+    }
+  }
+  //function reset
+  function reset() {
+    for (let i = 0; i < 10; i++) {
+      board[i] = [];
+      for (let j = 0; j < 10; j++) {
+        board[i][j] = { isShip: "none", isAttacked: "not" };
+      }
+    }
+  }
+  //function to place a ship at given coordinates
+  function placeShip(row, column, axis, shipname) {
+    let ship = getShip(shipname);
+    let length = ship.lengthOfShip;
+    if (axis == 0) {
+      for (let temp = 0; temp < length; temp++) {
+        board[row][column + temp].isShip = shipname;
+      }
+    }
+    if (axis == 1) {
+      for (let temp = 0; temp < length; temp++) {
+        board[row + temp][column].isShip = shipname;
       }
     }
     return board;
@@ -85,6 +103,6 @@ function gameBoard() {
     }
     return true;
   }
-  return { board, placeShip, recieveAttack, haveAllShipsSunk };
+  return { board, placeShip, recieveAttack, haveAllShipsSunk, check, reset };
 }
 export { gameBoard };
